@@ -1,0 +1,30 @@
+main section {
+  margin: 10% auto 0px;
+}
+
+main section#userInfo *{
+  margin-top: 5%;
+}
+
+main section#actions{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 25%;
+}
+
+main section#actions button{
+  padding: 2rem 1rem;
+  border-radius: 0.8rem;
+  margin: 1rem;
+}
+
+main section#actions button#questions{
+  justify-self: flex-end;
+}
+
+main section#actions button#questionary{
+  justify-self: flex-start;
+}

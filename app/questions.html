@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla 3</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/pantalla3.css">
+</head>
+<body>
+    <main>
+        <section id="questionsForm">
+            <form action="#" method="post">
+                <div class="formRow">
+                    <label for="question">Pregunta</label>
+                    <input type="text" name="question" id="question">
+                </div>
+
+                <div class="formRow">
+                    <label for="verdadero">Verdadero</label>
+                    <input type="radio" name="answer" id="verdadero" value="verdadero">
+    
+                    <label for="falso">Falso</label>
+                    <input type="radio" name="answer" id="falso" value="falso">
+                </div>
+
+                <div class="formRow">
+                    <label for="score">Puntuación</label>
+                    <input type="number" name="score" id="score" min="0" max="9" maxlength="1">
+                </div>
+
+                <div class="formRow">
+                    <button id="back">Atrás</button>
+                    <button id="save">Grabar</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="questionsCreated">
+            <table id="questions">
+                <tr>
+                    <th>Pregunta</th>
+                    <th>Respuesta</th>
+                    <th>Puntuación</th>
+                    <th>Estado</th>
+                </tr>
+
+                <!-- Se creara desde JV una fila por cada nueva pregunta -->
+                <tr>
+                    <td>Pregun 1</td>
+                    <td>Verdadero</td>
+                    <td>5</td>
+                    <td>OK</td>
+                </tr>
+
+                <tr>
+                    <td>Pregun 2</td>
+                    <td>Falso</td>
+                    <td>2</td>
+                    <td>Guardando...</td>
+                </tr>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

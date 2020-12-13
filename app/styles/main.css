@@ -1,0 +1,17 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+body{
+  width: 90%;
+  margin: 0px auto;
+
+}
+
+main section {
+  text-align: center;
+}
+

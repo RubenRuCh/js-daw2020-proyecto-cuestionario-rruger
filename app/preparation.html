@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla 4</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/pantalla4.css">
+</head>
+<body>
+    <main>
+        <section id="questionsAvailable">
+            <ul>
+                <li>Pregun 2</li>
+                <li>¿Esto es una lista?</li>
+            </ul>
+        </section>
+
+
+        <section id="questionsSelected">
+            <ul>
+                <li>Pregun 1</li>
+                <li>Pregunta fácil</li>
+            </ul>
+        </section>
+        
+
+        <section id="questionaryInfo">
+            <form action="#" method="post">
+                <p>Duración del cuestionario (en minutos)</p>
+
+                <input type="number" name="duration" id="duration" min="1" contenteditable="false"> <!-- Deshabilitar via JS el evento keypress? -->
+
+                <section id="actions">
+                    <button id="view">Visualizar</button>
+                    <button id="end">Acabar</button>
+                </section>
+                
+            </form>
+        </section>
+  
+    </main>
+</body>
+</html>

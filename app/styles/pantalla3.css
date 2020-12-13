@@ -1,0 +1,78 @@
+main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+main section{
+  border: 1px solid black;
+  height: 95vh;
+}
+
+/* Question's form */
+main section#questionsForm {
+  flex: 35%;
+  margin-right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+main section#questionsForm div.formRow {
+  margin: 1rem 0.5rem;
+  margin-top: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+main section#questionsForm div.formRow:first-child {
+  margin-top: 0;
+}
+
+main section#questionsForm div.formRow input {
+  height: 2rem;
+  width: 20rem;
+}
+
+main section#questionsForm div.formRow input[name="answer"]{
+  height: 2rem;
+  width: 2rem;
+}
+
+main section#questionsForm div.formRow input[value="verdadero"] {
+  margin-right: 40%;
+}
+
+main section#questionsForm div.formRow button {
+  padding: 0.5rem 1rem;
+}
+
+main section#questionsForm div.formRow button#save {
+  margin-left: 50%;
+}
+
+
+
+/* Questions already created */
+main section#questionsCreated {
+  flex: 65%;
+  overflow: auto;
+}
+
+main section#questionsCreated table{
+  margin: 1rem;
+  width: 95%;
+}
+
+main section#questionsCreated table tr th{
+  border-bottom: 1px dotted black;
+  padding-bottom: 0.2rem;
+}
+
+main section#questionsCreated table tr:nth-child(2) td{
+  padding-top: 0.5rem;
+}

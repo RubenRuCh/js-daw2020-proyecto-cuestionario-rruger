@@ -1,0 +1,7 @@
+main section {
+  margin: 25% auto;
+}
+
+main section#login{
+  margin: 0px;
+}
