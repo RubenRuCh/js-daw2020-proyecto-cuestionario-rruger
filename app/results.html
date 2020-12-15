@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pantalla 6</title>
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/pantalla6.css">
+</head>
+<body>
+    <main>
+        <h1>Resultados del cuestionario</h1>
+
+        <section id="result">
+            <caption>Tiempo empleado: <span id="timeUsed">1:50</span></caption>
+            <table id="questions">
+                <!-- Se creara desde JV una fila por cada pregunta -->
+                <tr>
+                    <td>
+                        <label>Pregunta:</label>
+                        <input type="text" readonly value="¿2 + 2 = 4?">
+                    </td>
+                   
+                    <td>
+                        <span>Respuesta:</span>
+                        <span>VERDADERO</span>
+                    </td>
+ 
+                    <td class="acierto">Acierto</td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Pregunta:</label>
+                        <input type="text" readonly value="¿2 + 1 = 4?">
+                    </td>
+                   
+                    <td>
+                        <span>Respuesta:</span>
+                        <span>VERDADERO</span>
+                    </td>
+ 
+                    <td class="fallo">Fallo</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="actions">
+            <button id="start">Inicio</button>
+        </section>
+    </main>
+</body>
+</html>

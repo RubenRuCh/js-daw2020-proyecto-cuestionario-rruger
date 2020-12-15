@@ -1,0 +1,65 @@
+/* Question's form */
+main section#containerQuestion form {
+  margin-right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+main section#containerQuestion div.formRow {
+  margin: 1rem 0.5rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+main section#containerQuestion div.formRow:first-child {
+  margin-top: 0;
+  align-self: flex-end;
+}
+
+main section#containerQuestion div.formRow:last-child input {
+  margin-left: -1rem;
+}
+
+main section#containerQuestion div.formRow:last-child label {
+  margin-left: 4rem;
+}
+
+main section#containerQuestion div.formRow input {
+  height: 2rem;
+  width: 5rem;
+  margin: 1rem;
+  text-align: center;
+}
+
+main section#containerQuestion div.formRow textarea {
+  resize: none;
+  margin: 1rem;
+}
+
+
+main section#containerQuestion div.formRow input[name="question"]{
+  height: 2rem;
+  width: 20rem;
+  margin: 1rem;
+}
+
+
+/* Buttons */
+main section#actions{
+  margin: 5rem;
+}
+
+main section#actions button {
+  padding: 0.5rem 1rem;
+}
+
+main section#actions button#next {
+  margin-left: 50%;
+}
+
+

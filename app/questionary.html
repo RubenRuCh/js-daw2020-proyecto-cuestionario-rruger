@@ -9,8 +9,34 @@
 </head>
 <body>
     <main>
-        
+        <section id="containerQuestion">
+            <form action="#" method="post">
+                <div class="formRow">
+                    <label for="countdown">Tiempo restante:</label>
+                    <input type="text" id="countdown" name="countdown" readonly value="5:40">
+                </div>
+
+                <div class="formRow">
+                    <label for="question">Pregunta:</label>
+                    <textarea name="question" id="question" cols="40" rows="5" readonly>¿2 + 2 = 4?</textarea>
+                    <!--<input type="text" name="question" id="question" readonly value="¿2 + 2 = 4?">-->
+                </div>
+
+                <div class="formRow">
+                    <label for="verdadero">Verdadero</label>
+                    <input type="radio" name="answer" id="verdadero" value="verdadero">
+    
+                    <label for="falso">Falso</label>
+                    <input type="radio" name="answer" id="falso" value="falso">
+                </div>
+            </form>
+        </section>
   
+
+        <section id="actions">
+            <button id="endQuestionary">Finalizar</button>
+            <button id="next">Siguiente</button>
+        </section>
     </main>
 </body>
 </html>
