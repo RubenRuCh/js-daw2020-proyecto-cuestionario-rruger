@@ -1,3 +1,5 @@
+
+
 /* Question's form */
 main section#containerQuestion form {
   margin-right: 0.5rem;
@@ -55,7 +57,7 @@ main section#actions{
 }
 
 main section#actions button {
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
 }
 
 main section#actions button#next {

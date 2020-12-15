@@ -27,10 +27,16 @@ main section#questionsForm div.formRow {
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 main section#questionsForm div.formRow:first-child {
   margin-top: 0;
+}
+
+main section#questionsForm div.formRow:last-child {
+  flex-wrap: nowrap;
+  justify-content: space-between;
 }
 
 main section#questionsForm div.formRow input {
@@ -48,13 +54,8 @@ main section#questionsForm div.formRow input[value="verdadero"] {
 }
 
 main section#questionsForm div.formRow button {
-  padding: 0.5rem 1rem;
+  padding: 1rem 2rem;
 }
-
-main section#questionsForm div.formRow button#save {
-  margin-left: 50%;
-}
-
 
 
 /* Questions already created */
