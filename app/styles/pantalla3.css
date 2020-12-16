@@ -22,7 +22,7 @@ main section#questionsForm {
 
 main section#questionsForm div.formRow {
   margin: 1rem 0.5rem;
-  margin-top: 50%;
+  margin-top: 25%;
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -31,7 +31,7 @@ main section#questionsForm div.formRow {
 }
 
 main section#questionsForm div.formRow:first-child {
-  margin-top: 0;
+  margin-top: 0rem;
 }
 
 main section#questionsForm div.formRow:last-child {
@@ -53,9 +53,16 @@ main section#questionsForm div.formRow input[value="verdadero"] {
   margin-right: 40%;
 }
 
+main section#questionsForm div.formRow textarea {
+  resize: none;
+  margin: 1rem;
+}
+
 main section#questionsForm div.formRow button {
   padding: 1rem 2rem;
 }
+
+
 
 
 /* Questions already created */
@@ -77,3 +84,4 @@ main section#questionsCreated table tr th{
 main section#questionsCreated table tr:nth-child(2) td{
   padding-top: 0.5rem;
 }
+
