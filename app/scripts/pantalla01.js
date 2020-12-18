@@ -1,6 +1,9 @@
 // Import temporizador.js
 import * as Temporizador from "./temporizador.js";
 
+// Import User.js
+import { User } from "./class/User.js";
+
 // Create a control variable to check if login screen has been printed
 var printed = false;
 
@@ -49,6 +52,12 @@ function printLoginScreen() {
   }
 }
 
+/**
+ * Prepare login screen to validate users
+ *
+ * @param {Node} input Input email
+ * @param {Node} form Form that represent the login screen
+ */
 function configUserValidation(input, form) {
   // When input lost focus, check if value have the right format
   input.addEventListener("blur", (event) => {
@@ -82,8 +91,8 @@ function configUserValidation(input, form) {
     }
     // If the value have the right format, save the login in a cookie and redirect to next screen
     else {
-      window.location.replace("./logged.html");
-      // TODO Crear la cookie
+      login(input.value);
+      //window.location.replace("./logged.html");
     }
   });
 
@@ -91,6 +100,17 @@ function configUserValidation(input, form) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
   });
+}
+
+function login(email) {
+  var oldUser = Cookies.get(email);
+  const user = new User(email);
+
+  if (oldUser != undefined) {
+    oldUser = user.getFromJSON(oldUser);
+  }
+
+  Cookies.set(email, JSON.stringify(user), { expires: 1 });
 }
 
 /**
