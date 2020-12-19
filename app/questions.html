@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./styles/pantalla3.css">
 
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script src="./scripts/pantalla03.js" type="module"></script>
 </head>
 <body>
     <main>
@@ -20,10 +21,10 @@
 
                 <div class="formRow">
                     <label for="verdadero">Verdadero</label>
-                    <input type="radio" name="answer" id="verdadero" value="verdadero">
+                    <input type="radio" name="answer" id="verdadero" value="Verdadero">
     
                     <label for="falso">Falso</label>
-                    <input type="radio" name="answer" id="falso" value="falso">
+                    <input type="radio" name="answer" id="falso" value="Falso">
                 </div>
 
                 <div class="formRow">
@@ -47,20 +48,11 @@
                     <th>Estado</th>
                 </tr>
 
+                <tr id="cargando">
+                    <td colspan="4">Cargando preguntas...</td>
+                </tr>
                 <!-- Se creara desde JV una fila por cada nueva pregunta -->
-                <tr>
-                    <td>Pregun 1</td>
-                    <td>Verdadero</td>
-                    <td>5</td>
-                    <td>OK</td>
-                </tr>
 
-                <tr>
-                    <td>Pregun 2</td>
-                    <td>Falso</td>
-                    <td>2</td>
-                    <td>Guardando...</td>
-                </tr>
             </table>
         </section>
     </main>

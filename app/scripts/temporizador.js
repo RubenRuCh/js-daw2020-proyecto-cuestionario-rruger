@@ -10,7 +10,11 @@
  * @param {Function} rejectFunction Function to send to reject
  * @returns {promise} promise
  */
-function setTimer(miliseconds, resolvFunction, rejectFunction) {
+function setTimer(
+  miliseconds,
+  resolvFunction,
+  rejectFunction = Error("Error with setTimer")
+) {
   let promise = new Promise((resolv, reject) => {
     var resolvTimer = setTimeout(() => {
       clearTimeout(rejectTimer);

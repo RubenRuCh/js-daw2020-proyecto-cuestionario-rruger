@@ -1,8 +1,5 @@
-// Import temporizador.js
-import * as Temporizador from "./temporizador.js";
-
-// Import User.js
-import { User } from "./class/User.js";
+// Import Main.js
+import { Temporizador, User } from "./main.js";
 
 // Create a control variable to check if login screen has been printed
 var printed = false;
@@ -67,12 +64,12 @@ function configUserValidation(input, form) {
       errorEmail.parentNode.removeChild(errorEmail);
     }
 
-    let regexRFC5322 = new RegExp(
-      "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+    let regexEmail = new RegExp(
+      "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"
     );
 
     // If the value doesn't have the right format, create a message error and put it under login screen
-    if (regexRFC5322.test(event.target.value) == false) {
+    if (regexEmail.test(event.target.value) == false) {
       let errorEmail = document.createElement("strong");
       errorEmail.setAttribute("class", "errorEmail");
       errorEmail.style.color = "red";
@@ -92,7 +89,7 @@ function configUserValidation(input, form) {
     // If the value have the right format, save the login in a cookie and redirect to next screen
     else {
       login(input.value);
-      //window.location.replace("./logged.html");
+      window.location.replace("./logged.html");
     }
   });
 
@@ -102,15 +99,30 @@ function configUserValidation(input, form) {
   });
 }
 
+/**
+ * Save user data into Cookies
+ *
+ * If the user did log before, update it's data on his cookie. If not, create a new user.
+ * In both cases we create a cookie currentUser that contains the info of the current user
+ *
+ * @param {String} email Value of email input
+ */
 function login(email) {
-  var oldUser = Cookies.get(email);
-  const user = new User(email);
+  // Get User object (empty for now)
+  const user = new User();
+  // Try to get user info from cookies
+  var oldUserJSON = Cookies.get(email);
 
-  if (oldUser != undefined) {
-    oldUser = user.getFromJSON(oldUser);
+  if (oldUserJSON != undefined) {
+    // If cookies have info of user, update it's data and set it as currentUser
+    const oldUser = user.getFromJSON(oldUserJSON);
+    oldUser.lastLogin = oldUser.newLogin;
+    oldUser.saveUser();
+  } else {
+    // If cookies don't have info of user, create it using empty User object and set it as currentUser
+    user.email = email;
+    user.saveUser();
   }
-
-  Cookies.set(email, JSON.stringify(user), { expires: 1 });
 }
 
 /**
@@ -118,10 +130,7 @@ function login(email) {
  */
 window.addEventListener("load", (event) => {
   // Call setTimer with 5 seconds and actions to manage resolv and reject situations
-  let promise = Temporizador.setTimer(5000, printLoginScreen, () => {
-    // If something went wrong in setTimer, create an Error
-    Error("Error with setTimer");
-  });
+  let promise = Temporizador.setTimer(5000, printLoginScreen);
   // If everything its correct, execute printLoginScreen function
   promise.then(
     (response) => {
