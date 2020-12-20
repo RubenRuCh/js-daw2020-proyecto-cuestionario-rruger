@@ -1,5 +1,5 @@
 // Import Main.js
-import { User, currentUser } from "./main.js";
+import { currentUser } from "./main.js";
 
 let h1 = document.querySelector("section#userInfo h1");
 let p = document.querySelector("section#userInfo p");
@@ -22,3 +22,8 @@ questionsyBtn.addEventListener("click", (event) => {
   event.preventDefault();
   window.location.replace("./questions.html");
 });
+
+// Disable questionaryBtn if currentUser doesn't have questions available
+if (currentUser.questionary.questions.length == 0) {
+  questionaryBtn.disabled = true;
+}

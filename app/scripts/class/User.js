@@ -58,13 +58,14 @@ function User() {
   };
 
   /**
-   * Save Question in Questionary's array of questions
+   * Create a new Question in User's Questionary's array of questions
+   *
+   * printQuestion will print it into HTML table and then save it in User's cookie
    *
    * @param {Question} Question
    */
   this.createQuestion = (Question) => {
-    this.questionary.questions.push(Question);
-    this.saveUser();
+    Question.printQuestion();
   };
 
   /**
@@ -90,6 +91,14 @@ function User() {
   this.saveUser = () => {
     Cookies.set(this.email, JSON.stringify(this), { expires: 10 });
     Cookies.set("currentUser", JSON.stringify(this), { expires: 1 });
+  };
+
+  this.enableBackBtn = () => {
+    document.querySelector("button#back").disabled = false;
+  };
+
+  this.disableBackBtn = () => {
+    document.querySelector("button#back").disabled = true;
   };
 }
 

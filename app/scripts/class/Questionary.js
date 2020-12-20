@@ -7,6 +7,7 @@ function Questionary() {
   this.punctuation = 0;
   this.maxPunctuation = 0;
   this.questions = new Array(); // Array of Question objects
+  this.numQuestionsToSave = 0; // Number of Question objects to be saved
 
   /**
    * Return an instance of Questionary with data passed by questionaryJSON
@@ -29,6 +30,13 @@ function Questionary() {
    */
   this.getQuestionsAvailable = () => {
     return this.questions.filter((question) => !question.isSelected);
+  };
+
+  /**
+   * Return true if all questions have been saved correctly, and false if there is any question that is still processing
+   */
+  this.areAllQuestionsSaved = () => {
+    return this.numQuestionsToSave == 0;
   };
 }
 
