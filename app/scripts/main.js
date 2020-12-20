@@ -7,9 +7,6 @@ import { User } from "./class/User.js";
 // Import Question.js
 import { Question } from "./class/Question.js";
 
-// Import loadQuestions from Question.js
-import { loadQuestions } from "./class/Question.js";
-
 // Import Questionary.js
 import { Questionary } from "./class/Questionary.js";
 
@@ -20,14 +17,8 @@ let url = window.location.href;
 
 if (!url.includes("index.html")) {
   currentUser = userClass.getCurrentUser();
+  currentUser.loadQuestionary();
 }
 
 // Export modules to be used outside
-export {
-  Temporizador,
-  User,
-  currentUser,
-  Question,
-  Questionary,
-  loadQuestions,
-};
+export { Temporizador, User, currentUser, Question, Questionary };

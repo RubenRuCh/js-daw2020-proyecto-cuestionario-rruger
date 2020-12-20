@@ -1,5 +1,5 @@
 // Import Main.js
-import { currentUser, Question, loadQuestions } from "./main.js";
+import { currentUser, Question } from "./main.js";
 
 // Clear form
 const questionForm = document.querySelector("section#questionsForm form");
@@ -32,10 +32,13 @@ saveBtn.addEventListener("click", (event) => {
   question.title = titleInput.value;
   question.answer = answerInput.value;
   question.value = valueInput.value;
-  currentUser.createQuestion(question);
+  currentUser.questionary.createQuestion(question);
 
   // Clear form
   questionForm.reset();
+
+  // Disable saveBtn
+  saveBtn.disabled = true;
 });
 
 // Config form
@@ -43,8 +46,12 @@ questionForm.addEventListener("submit", (event) => {
   event.preventDefault();
 });
 
-// Check every change on form to decide if btnSave can be enabled (it will only be enabled when all inputs have value)
-questionForm.addEventListener("change", (event) => {
+/**
+ * Check every change on form to decide if btnSave can be enabled (it will only be enabled when all inputs have value)
+ *
+ * @param {Event} event
+ */
+const checkInputs = (event) => {
   let answerInput = document.querySelector("input[name='answer']:checked"); // Get the one it's checked
   const formValues = [titleInput.value, answerInput, valueInput.value];
 
@@ -57,7 +64,12 @@ questionForm.addEventListener("change", (event) => {
   } else {
     saveBtn.disabled = false;
   }
-});
+};
+
+// Check inputs
+questionForm.addEventListener("change", checkInputs);
+valueInput.addEventListener("keyup", checkInputs);
+titleInput.addEventListener("keyup", checkInputs);
 
 // Config valueInput
 valueInput.addEventListener("keydown", (event) => {
@@ -82,5 +94,5 @@ valueInput.addEventListener("keyup", (event) => {
 });
 
 // Load questions
-const questionary = currentUser.getQuestionary();
-loadQuestions(true); // Force it to wait 5 seconds before load them
+const questionClass = new Question();
+questionClass.loadQuestions(true); // Force it to wait 5 seconds before load them

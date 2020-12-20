@@ -58,14 +58,10 @@ function User() {
   };
 
   /**
-   * Create a new Question in User's Questionary's array of questions
-   *
-   * printQuestion will print it into HTML table and then save it in User's cookie
-   *
-   * @param {Question} Question
+   * Update this.questionary parsing it to Questionary object
    */
-  this.createQuestion = (Question) => {
-    Question.printQuestion();
+  this.loadQuestionary = () => {
+    this.questionary = this.getQuestionary();
   };
 
   /**
@@ -87,10 +83,19 @@ function User() {
   /**
    * Update User info in cookie
    *
+   * This action is done asynchronously using promises
    */
   this.saveUser = () => {
-    Cookies.set(this.email, JSON.stringify(this), { expires: 10 });
-    Cookies.set("currentUser", JSON.stringify(this), { expires: 1 });
+    let savePromise = new Promise((resolv, reject) => {
+      Cookies.set(this.email, JSON.stringify(this), { expires: 10 });
+      Cookies.set("currentUser", JSON.stringify(this), { expires: 1 });
+
+      resolv("User information has been saved successfully");
+    });
+
+    savePromise.then((resolv) => {
+      console.log(resolv);
+    });
   };
 
   this.enableBackBtn = () => {
