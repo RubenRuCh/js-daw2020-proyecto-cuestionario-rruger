@@ -78,7 +78,7 @@ function Question() {
    *
    * @param {String} idList
    */
-  this.printTitle = (idSectionList) => {
+  this.printTitle = (idSectionList, reorderItems = false) => {
     const list = document.querySelector(`section#${idSectionList} ul`);
     const listElement = document.createElement("li");
     listElement.textContent = this.title;
@@ -123,6 +123,7 @@ function Question() {
         event.target.dataset.title
       );
 
+      // Get old question
       const oldQuestionInCookie =
         currentUser.questionary.questions[indexOldQuestion];
 
@@ -130,6 +131,7 @@ function Question() {
         `li[data-title='${oldQuestionInCookie.title}']`
       );
 
+      // Get new question (the one that has been dropped)
       let indexNewQuestion = currentUser.questionary.searchQuestionByTitle(
         newQuestionTitle
       );
@@ -140,13 +142,50 @@ function Question() {
       const newQuestionInDocument = document.createElement("li");
       newQuestionInDocument.textContent = newQuestionInCookie.title;
 
+      // Update HTML view with the new order
       const parent = oldQuestionInDocument.parentNode;
 
-      parent.insertBefore(newQuestionInDocument, oldQuestionInDocument);
-      parent.removeChild(parent.lastChild);
+      const arrayWithToolsToOrder = [];
+      arrayWithToolsToOrder["parent"] = parent;
+      arrayWithToolsToOrder["oldQuestionInDocument"] = oldQuestionInDocument;
+
+      this.title = newQuestionInCookie.title;
+      this.isSelected = newQuestionInCookie.isSelected;
+
+      // Call printTitle to give newQuestionInDocument same properties that before
+      this.printTitle(idSectionList, arrayWithToolsToOrder);
     });
 
-    list.appendChild(listElement);
+    if (!reorderItems) {
+      list.appendChild(listElement);
+    } else {
+      reorderItems["parent"].insertBefore(
+        listElement,
+        reorderItems["oldQuestionInDocument"]
+      );
+
+      // If Questions were in different list, act like this
+      let origin = this.isSelected ? "selected" : "available";
+      console.log(listElement.dataset.origin);
+      console.log(origin);
+
+      if (listElement.dataset.origin !== origin) {
+        console.log("Origenes diferentes");
+        // If the Question that receive the new Question is not the last one, remove the lastChild
+        if (
+          reorderItems["parent"].lastChild.dataset.title !==
+          reorderItems["oldQuestionInDocument"].dataset.title
+        ) {
+          reorderItems["parent"].removeChild(reorderItems["parent"].lastChild);
+        } else {
+          /* If the Question that receive the new Question is the last one of the list, 
+      remove the first Question we found with the new Question title (will be new Question's previus place)*/
+          reorderItems["parent"].removeChild(
+            document.querySelector(`li[data-title='${this.title}']`)
+          );
+        }
+      }
+    }
   };
 
   /**
