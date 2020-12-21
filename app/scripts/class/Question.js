@@ -113,6 +113,7 @@ function Question() {
     /* When we drop a Question inside another, reorder it */
     listElement.addEventListener("drop", async (event) => {
       listElement.style.paddingTop = "0rem";
+      let newQuestionTitle = event.dataTransfer.getData("text");
 
       // Wait 10ms to allow enough time to update Question list with list drop event
       await Temporizador.setTimer(10);
@@ -122,30 +123,27 @@ function Question() {
         event.target.dataset.title
       );
 
-      const oldQuestion = currentUser.questionary.questions[indexOldQuestion];
+      const oldQuestionInCookie =
+        currentUser.questionary.questions[indexOldQuestion];
 
-      // In case we drop a Question inside selectedQuestions list
-      if (oldQuestion.isSelected) {
-        // New Question will be the last one of selectedQuestions
-        const newQuestion = currentUser.questionary
-          .getQuestionsSelected()
-          .pop();
+      const oldQuestionInDocument = document.querySelector(
+        `li[data-title='${oldQuestionInCookie.title}']`
+      );
 
-        console.log(oldQuestion);
-        console.log(newQuestion);
-        // TODO ordenar
-      }
-      // In case we drop a Question inside availableQuestions list
-      else {
-        // New Question will be the last one of availableQuestions
-        const newQuestion = currentUser.questionary
-          .getQuestionsAvailable()
-          .pop();
+      let indexNewQuestion = currentUser.questionary.searchQuestionByTitle(
+        newQuestionTitle
+      );
 
-        console.log(oldQuestion);
-        console.log(newQuestion);
-        // TODO ordenar
-      }
+      const newQuestionInCookie =
+        currentUser.questionary.questions[indexNewQuestion];
+
+      const newQuestionInDocument = document.createElement("li");
+      newQuestionInDocument.textContent = newQuestionInCookie.title;
+
+      const parent = oldQuestionInDocument.parentNode;
+
+      parent.insertBefore(newQuestionInDocument, oldQuestionInDocument);
+      parent.removeChild(parent.lastChild);
     });
 
     list.appendChild(listElement);
