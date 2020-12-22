@@ -23,6 +23,13 @@ durationInput.addEventListener("change", (event) => {
 const viewBtn = document.querySelector("button#view");
 const endBtn = document.querySelector("button#end");
 
+// If there are selected questions, enable viewBtn. If not, let it disabled
+let arrayQuestionSelected = currentUser.questionary.getQuestionsSelected();
+viewBtn.disabled = true;
+if (Object.keys(arrayQuestionSelected).length > 0) {
+  viewBtn.disabled = false;
+}
+
 // Back to logged.html
 endBtn.addEventListener("click", (event) => {
   event.preventDefault();
@@ -71,6 +78,16 @@ listQuestionsAvailable.addEventListener("drop", (event) => {
     // Update in cookie
     currentUser.questionary.moveQuestion(questionTitle);
   }
+
+  // Enable or disable viewBtn depending on whether or not there are selected questions
+  let arrayQuestionSelected = currentUser.questionary.getQuestionsSelected();
+  viewBtn.disabled = true;
+
+  if (Object.keys(arrayQuestionSelected).length > 0) {
+    viewBtn.disabled = false;
+  } else {
+    viewBtn.disabled = true;
+  }
 });
 
 listQuestionsSelected.addEventListener("drop", (event) => {
@@ -89,5 +106,15 @@ listQuestionsSelected.addEventListener("drop", (event) => {
 
     // Update in cookie
     currentUser.questionary.moveQuestion(questionTitle);
+  }
+
+  // Enable or disable viewBtn depending on whether or not there are selected questions
+  let arrayQuestionSelected = currentUser.questionary.getQuestionsSelected();
+  viewBtn.disabled = true;
+
+  if (Object.keys(arrayQuestionSelected).length > 0) {
+    viewBtn.disabled = false;
+  } else {
+    viewBtn.disabled = true;
   }
 });

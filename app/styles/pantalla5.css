@@ -51,6 +51,17 @@ main section#containerQuestion div.formRow input[name="question"]{
 }
 
 
+.complete {
+  background-color: lightgreen;
+  font-weight: bold;
+}
+
+
+.noTime {
+  background-color: red;
+  font-weight: bold;
+}
+
 /* Buttons */
 main section#actions{
   margin: 5rem;

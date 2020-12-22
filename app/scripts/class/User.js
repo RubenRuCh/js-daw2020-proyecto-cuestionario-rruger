@@ -94,6 +94,7 @@ function User() {
     });
 
     savePromise.then((resolv) => {
+      // Notify user of changes in cookies without being intrusive
       console.log(resolv);
     });
   };

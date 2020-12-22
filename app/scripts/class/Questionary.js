@@ -4,7 +4,7 @@ import { currentUser, Question, Temporizador } from "../main.js";
 function Questionary() {
   this.duration = 60; // At leats 1 minute (60 seconds)
   this.remainingTime = 0;
-  this.punctuation = 0;
+  this.punctuation = -1;
   this.maxPunctuation = 0;
   this.questions = new Array(); // Array of Question objects
   this.numQuestionsToSave = 0; // Number of Question objects to be saved
@@ -98,6 +98,17 @@ function Questionary() {
   };
 
   /**
+   * Reset this questionary
+   *
+   * Return questions at their original state (isCorrect = false)
+   */
+  this.resetQuestionary = () => {
+    for (const question of this.questions) {
+      question.isCorrect = false;
+    }
+  };
+
+  /**
    * Return all questions that are selected to be part of the questionary
    */
   this.getQuestionsSelected = () => {
@@ -175,6 +186,22 @@ function Questionary() {
   };
 
   /**
+   * Return the time used in complete the questionary in mm:ss
+   */
+  this.getTimeUsed = () => {
+    const secondsUsed = parseInt(this.duration) - parseInt(this.remainingTime);
+
+    var minutes = Math.floor(parseInt(secondsUsed) / 60);
+    var seconds = parseInt(secondsUsed) - minutes * 60;
+
+    if (seconds.toString().length == 1) {
+      seconds = `0${seconds}`;
+    }
+
+    return `${minutes}:${seconds}`;
+  };
+
+  /**
    * Return the duration of the questionary in minutes
    */
   this.getDuration = () => {
@@ -188,7 +215,23 @@ function Questionary() {
     var minutes = Math.floor(parseInt(this.remainingTime) / 60);
     var seconds = parseInt(this.remainingTime) - minutes * 60;
 
+    if (seconds.toString().length == 1) {
+      seconds = `0${seconds}`;
+    }
+
     return `${minutes}:${seconds}`;
+  };
+
+  /**
+   * Decrease 1 second to remainingTime and update changes in cookies
+   */
+  this.countdown = () => {
+    if (parseInt(this.remainingTime) > 0) {
+      this.remainingTime--;
+      currentUser.saveUser();
+    } else {
+      return -1;
+    }
   };
 
   /**

@@ -1,4 +1,4 @@
-main h1 {
+main h1, main h2 {
   margin: 0.5rem auto 2rem;
   text-align: center;
 }
@@ -28,7 +28,12 @@ main section#result table tr td{
   padding: 0.2rem;
   border-radius: 0.5rem;
   text-align: center;
+}
 
+main section#result textarea {
+  resize: none;
+  height: 2rem;
+  overflow: auto;
 }
 
 .acierto{

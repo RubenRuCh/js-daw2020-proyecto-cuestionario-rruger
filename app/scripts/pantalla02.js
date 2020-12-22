@@ -27,3 +27,12 @@ questionsyBtn.addEventListener("click", (event) => {
 if (currentUser.questionary.questions.length == 0) {
   questionaryBtn.disabled = true;
 }
+
+// Show last questionary result
+if (currentUser.questionary.punctuation >= 0) {
+  let lastResult = document.createElement("p");
+  lastResult.textContent = `El resultado de tu último cuestionario fue de ${currentUser.questionary.punctuation}/${currentUser.questionary.maxPunctuation}`;
+  lastResult.style.fontWeight = "bold";
+
+  p.parentNode.insertBefore(lastResult, p.nextSibling);
+}
