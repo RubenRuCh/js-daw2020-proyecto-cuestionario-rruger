@@ -76,7 +76,8 @@ function Question() {
   /**
    * Print this question's title in a HTML list format
    *
-   * @param {String} idList
+   * @param {String} idSectionList HTML id of list where we want to print the newQuestion
+   * @param {Boolean|Array} reorderItems false if there's nothing to reorder. Array with parent of oldQuestion and oldQuestion to be reorder
    */
   this.printTitle = (idSectionList, reorderItems = false) => {
     const list = document.querySelector(`section#${idSectionList} ul`);
@@ -156,35 +157,34 @@ function Question() {
       this.printTitle(idSectionList, arrayWithToolsToOrder);
     });
 
+    // If its just move one Question from one list to another, just append it in the end
     if (!reorderItems) {
       list.appendChild(listElement);
-    } else {
+    }
+    // If they are the same question, we don't insert nor delete nothing
+    else if (
+      this.title == reorderItems["oldQuestionInDocument"].dataset.title
+    ) {
+      return true;
+    }
+    // If we drop a Question on top on other Question, we gonna reorder them
+    else {
+      // Get previus position of Question dropped
+      const newQuestionInLastPosition = document.querySelector(
+        `li[data-title='${this.title}']`
+      );
+      // Remove it
+      newQuestionInLastPosition.parentNode.removeChild(
+        newQuestionInLastPosition
+      );
+
+      // Insert Question dropped on top on the Question that received the drop
       reorderItems["parent"].insertBefore(
         listElement,
         reorderItems["oldQuestionInDocument"]
       );
 
-      // If Questions were in different list, act like this
-      let origin = this.isSelected ? "selected" : "available";
-      console.log(listElement.dataset.origin);
-      console.log(origin);
-
-      if (listElement.dataset.origin !== origin) {
-        console.log("Origenes diferentes");
-        // If the Question that receive the new Question is not the last one, remove the lastChild
-        if (
-          reorderItems["parent"].lastChild.dataset.title !==
-          reorderItems["oldQuestionInDocument"].dataset.title
-        ) {
-          reorderItems["parent"].removeChild(reorderItems["parent"].lastChild);
-        } else {
-          /* If the Question that receive the new Question is the last one of the list, 
-      remove the first Question we found with the new Question title (will be new Question's previus place)*/
-          reorderItems["parent"].removeChild(
-            document.querySelector(`li[data-title='${this.title}']`)
-          );
-        }
-      }
+      // TODO Save new order in cookies
     }
   };
 
