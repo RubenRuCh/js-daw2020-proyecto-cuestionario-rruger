@@ -5,6 +5,7 @@ function Question() {
   this.title;
   this.answer;
   this.value;
+  this.order = 999; // Determine order in selectedQuestion
   this.isCorrect = false; // Determine if the question has been answered correctly
   this.isLoaded = false; // Determine if the question was loaded correctly in the list
   this.isSelected = false; // Determine if the question has been chosen to be part of the questionary
@@ -184,17 +185,33 @@ function Question() {
         reorderItems["oldQuestionInDocument"]
       );
 
-      // TODO Save new order in cookies
+      // Save new order in cookies
+      currentUser.questionary.saveOrderOfSelectedQuestion();
     }
   };
 
   /**
    *  Save this Question in User cookie
    *
-   * @param {Question} Question
    */
   this.saveQuestion = () => {
     currentUser.questionary.questions.push(this);
+    currentUser.saveUser();
+  };
+
+  /**
+   *  Update this Question in User cookie
+   */
+  this.updateQuestion = () => {
+    // Get index of this Question
+    const indexQuestionToUpdate = currentUser.questionary.searchQuestionByTitle(
+      this.title
+    );
+
+    // Update this Question
+    currentUser.questionary.questions[indexQuestionToUpdate] = this;
+
+    // Make the changes permanent by updating cookies asynchronously
     currentUser.saveUser();
   };
 

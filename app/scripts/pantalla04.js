@@ -29,6 +29,12 @@ endBtn.addEventListener("click", (event) => {
   window.location.replace("./logged.html");
 });
 
+// Go to questionary.html
+viewBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  window.location.replace("./questionary.html");
+});
+
 // Load questions
 questionary.printQuestionsAvailable();
 questionary.printQuestionsSelected();

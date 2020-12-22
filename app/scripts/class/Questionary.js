@@ -54,6 +54,39 @@ function Questionary() {
   };
 
   /**
+   * Save in cookies changes on selectedQuestions order
+   *
+   */
+  this.saveOrderOfSelectedQuestion = () => {
+    const listQuestionSelected = document.querySelector(
+      "section#questionsSelected ul"
+    );
+
+    // Get Questions in selectedQuestions list
+    const questionsInList = new Array();
+
+    for (let question of listQuestionSelected.children) {
+      questionsInList.push(question.dataset.title);
+    }
+
+    /* We have all selected questions in their actual order,
+    now we have to save that order in our cookies list*/
+    var newOrder = 0;
+
+    for (let questionTitle of questionsInList) {
+      let currentIndex = this.searchQuestionByTitle(questionTitle);
+      let question = this.questions[currentIndex];
+      question.order = newOrder++;
+
+      // Update Question
+      this.questions[currentIndex] = question;
+    }
+
+    // Save questions's new order in cookie
+    currentUser.saveUser();
+  };
+
+  /**
    * Return index of Question object found in this.questions given it's title
    *
    * @param {String} questionTitle
@@ -75,10 +108,17 @@ function Questionary() {
    * Print all questions that are selected to be part of the questionary
    */
   this.printQuestionsSelected = async () => {
-    // Get selected questions sorted by their order (determined by user actions) //TODO MANTENER ORDEN
-    const selectedQuestions = this.getQuestionsSelected().sort((a, b) =>
-      a.title.toString().localeCompare(b.title, "es")
-    );
+    // Get selected questions sorted by their order (determined by user actions)
+    const selectedQuestions = this.getQuestionsSelected().sort((a, b) => {
+      // If there's order
+      if (a.order >= 0 && b.order >= 0) {
+        return parseInt(a.order) - parseInt(b.order);
+      }
+      // If not, order alphabetically
+      else {
+        return a.title.toString().localeCompare(b.title, "es");
+      }
+    });
 
     // Display 'Cargando...' to indicate we are loading questions
     let temporalList = document.querySelector("#questionsSelected ul");
@@ -139,6 +179,16 @@ function Questionary() {
    */
   this.getDuration = () => {
     return Math.floor(this.duration / 60);
+  };
+
+  /**
+   * Return the remaining time of the questionary in mm:ss
+   */
+  this.getCountdown = () => {
+    var minutes = Math.floor(parseInt(this.remainingTime) / 60);
+    var seconds = parseInt(this.remainingTime) - minutes * 60;
+
+    return `${minutes}:${seconds}`;
   };
 
   /**
